@@ -2,12 +2,10 @@ package test
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"log"
 	"testing"
 
-	"route-prototype/gopb"
 	m "route-prototype/mongo"
 
 	"go.mongodb.org/mongo-driver/bson"
@@ -23,36 +21,6 @@ func setUp() (*m.MongoDB, *mongo.Collection) {
 
 	collection := mongoDB.Client.Database("sample-database").Collection("collection")
 	return mongoDB, collection
-}
-
-func sampleRoute() interface{} {
-	route := gopb.Route{
-		Destination: "192.168.79.0",
-		Gateway:     "0.0.0.0",
-		Genmask:     "255.255.255.0",
-		Flags:       "U",
-		Metric:      100,
-		Ref:         0,
-		Use:         0,
-		Iface:       "ens33",
-	}
-
-	// Convert the Route struct to JSON
-	jsonData, err := json.Marshal(&route)
-	if err != nil {
-		log.Fatalf("Error marshaling JSON data: %v", err)
-	}
-
-	// Convert the JSON data to BSON
-	var bsonData interface{}
-	err = bson.UnmarshalExtJSON(jsonData, true, &bsonData)
-	if err != nil {
-		log.Fatalf("Error unmarshaling BSON data: %v", err)
-	}
-
-	fmt.Println("BSON data:", bsonData)
-
-	return bsonData
 }
 
 func TestInsertMany(t *testing.T) {

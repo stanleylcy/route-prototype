@@ -123,7 +123,7 @@ func (m *MongoDB) FindMany(collection *mongo.Collection,
 	for cur.Next(ctx) {
 		var result bson.M
 		err := cur.Decode(&result)
-		log.Printf("Returned: %v", result)
+		//log.Printf("Returned: %v", result)
 
 		if err != nil {
 			return nil, fmt.Errorf("failed to decode document: %v", err)
