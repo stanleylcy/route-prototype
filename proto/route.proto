@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option go_package = "../gopb";
+
+message Route {
+  string id = 1 ;
+  string destination = 2; 
+  string gateway = 3;
+  string genmask = 4;
+  string flags = 5;
+  int32 metric = 6;
+  int32 ref = 7;
+  int32 use = 8;
+  string iface = 9; 
+}
